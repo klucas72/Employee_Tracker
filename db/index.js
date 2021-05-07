@@ -54,15 +54,15 @@ class Database {
 
     addRole(title, salary, departmentId) {
         return new Promise((resolve, reject) => {
-            connection.query('INSERT INTO role (title, salary, department_id) values (?, ?, ?)', [title, salary, departmentId], function (err, data) {
+            connection.query('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)', [title, salary, departmentId], function (err, data) {
                 if (err) reject(err);
                 resolve(data);
             })
         })
     }
-    updateRole(role_id, name) {
+    updateRole(role_id, id) {
         return new Promise((resolve, reject) => {
-            connection.query('UPDATE employee SET role_id WHERE first_name = ?', [role_id, name], function (err, data) {
+            connection.query('UPDATE employee SET role_id = ? WHERE id = ? VALUES (?, ?)', [role_id, id], function (err, data) {
                 if (err) reject(err);
                 resolve(data);
             })

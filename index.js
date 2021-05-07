@@ -178,16 +178,16 @@ function addRoles() {
 
 function updateRole() {
     inquirer.prompt([{
-        type: "input",
-        name: "name",
-        message: "Please enter the first name of the employee you would like to update.",
+        type: "number",
+        name: "id",
+        message: "Please enter the ID of the employee you would like to update.",
     },
     {
         type: "number",
         name: "role_id",
         message: "please enter role ID.",
     }]).then(function (result) {
-        db.updateRole(result.name, result.role_id)
+        db.updateRole(result.id, result.role_id)
             .then(() => {
                 console.table("role updated");
                 choices()
