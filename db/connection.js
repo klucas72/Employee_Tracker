@@ -1,4 +1,6 @@
-require('dotenv').config();
+
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 const util = require("util");
 const mysql = require("mysql");
@@ -14,7 +16,7 @@ const connection = mysql2.createConnection({
 
 connection.connect((err) => {
     if (err) throw err;
-    console.log(`connected as id ${connection.threadID}\n`)
+    console.log(`connected as id ${connection.threadId}\n`);
 });
 
 connection.query = util.promisify(connection.query);
