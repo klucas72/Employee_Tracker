@@ -44,7 +44,7 @@ function choices() {
     inquirer.prompt({
         message: "please Select from the Following:",
         type: "list",
-        choices: ["View Employees", "View Departments", "View Roles", "Add Employee(s)", "Add Role(s)", "Add Department(s)", "Update Role(s)", "Delete Employee", "Exit"],
+        choices: ["View Employees", "View Departments", "View Roles", "Add Employee(s)", "Add Role(s)", "Add Department(s)", "Update Role(s)", "Delete Employee", "Delete Role", "Delete Department", "Exit"],
         name: "Choices"
 
     }).then(responses => {
@@ -80,6 +80,14 @@ function choices() {
 
             case "Delete Employee":
                 deleteEmployee();
+                break;
+
+            case "Delete Role":
+                deleteRole();
+                break;
+
+            case "Delete Department":
+                deleteDepartment();
                 break;
 
             default:
@@ -203,12 +211,40 @@ function deleteEmployee() {
     inquirer.prompt([{
         type: "number",
         name: "id",
-        message: "Please enter the ID of the Employee you want to remove."
+        message: "Please enter the ID of the employee you want to remove."
     }]).then(function (result) {
         db.deleteEmployee(result.id)
             .then(() => {
-                console.table("employee deleted")
+                console.table("employee deleted");
                 choices()
+            })
+    })
+}
+
+function deleteRole() {
+    inquirer.prompt([{
+        type: "number",
+        name: "id",
+        message: "Please enter the ID of the role you want to remove.",
+    }]).then(function (result) {
+        db.deleteRole(result.id)
+            .then(() => {
+                console.table("role deleted");
+                choices();
+            })
+    })
+}
+
+function deleteDepartment() {
+    inquirer.prompt([{
+        type: "number",
+        name: "id",
+        message: "Please enter the ID of the department you want to remove."
+    }]).then(function (result) {
+        db.deleteDepartment(result.id)
+            .then(() => {
+                console.table("department deleted");
+                choices();
             })
     })
 }

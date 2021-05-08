@@ -79,6 +79,23 @@ class Database {
             })
         })
     }
+    deleteRole(id) {
+        return new Promise((resolve, reject) => {
+            connection.query('DELETE FROM role where id = ?', [id], function (err, data) {
+                if (err) reject(err);
+                resolve(data);
+            })
+        })
+    }
+
+    deleteDepartment(id) {
+        return new Promise((resolve, reject) => {
+            connection.query('DELETE FROM department where id = ?', [id], function (err, data) {
+                if (err) reject(err);
+                resolve(data);
+            })
+        })
+    }
 
 }
 
