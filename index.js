@@ -1,8 +1,10 @@
+//listed dependencies
 const inquirer = require('inquirer');
 const cTable = require('console.table');
 const db = require('./db');
 const connection = require('./db/connection');
 
+//start application
 appStart();
 
 function appStart() {
@@ -38,13 +40,24 @@ function appStart() {
     `)
 }
 
+//asking questions
 choices();
 
 function choices() {
     inquirer.prompt({
         message: "please Select from the Following:",
         type: "list",
-        choices: ["View Employees", "View Departments", "View Roles", "Add Employee(s)", "Add Role(s)", "Add Department(s)", "Update Role(s)", "Delete Employee", "Delete Role", "Delete Department", "Exit"],
+        choices: ["View Employees",
+            "View Departments",
+            "View Roles",
+            "Add Employee(s)",
+            "Add Role(s)",
+            "Add Department(s)",
+            "Update Role(s)",
+            "Delete Employee",
+            "Delete Role",
+            "Delete Department",
+            "Exit"],
         name: "Choices"
 
     }).then(responses => {
@@ -97,26 +110,28 @@ function choices() {
     })
 }
 
+//returning results for viewing employees
 async function viewEmployees() {
     const employees = await db.findAllEmployees();
     console.table(employees);
     choices();
 }
 
+//returning results for viewing departments
 async function viewDepartments() {
     const departments = await db.findAllDepartments();
     console.table(departments)
     choices()
 }
 
-
+//returning results for viewing roles
 async function viewRoles() {
     const roles = await db.findAllRoles();
     console.table(roles);
     choices()
 }
 
-
+//returning results from adding employee
 function addEmployee() {
     inquirer.prompt([{
         type: "input",
@@ -147,6 +162,7 @@ function addEmployee() {
     })
 }
 
+//returning results from adding a department
 function addDepartment() {
     inquirer.prompt([{
         type: "input",
@@ -162,6 +178,7 @@ function addDepartment() {
 
 }
 
+//returning results from adding a role
 function addRoles() {
     inquirer.prompt([{
         type: "input",
@@ -187,7 +204,7 @@ function addRoles() {
     })
 }
 
-
+//returning results from updating a employee role
 function updateRole() {
     inquirer.prompt([{
         type: "number",
@@ -207,6 +224,7 @@ function updateRole() {
     })
 }
 
+//returning results from deleting an employee
 function deleteEmployee() {
     inquirer.prompt([{
         type: "number",
@@ -221,6 +239,7 @@ function deleteEmployee() {
     })
 }
 
+//returning results from deleting a role
 function deleteRole() {
     inquirer.prompt([{
         type: "number",
@@ -235,6 +254,7 @@ function deleteRole() {
     })
 }
 
+//returning results from deleting a department
 function deleteDepartment() {
     inquirer.prompt([{
         type: "number",

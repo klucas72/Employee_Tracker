@@ -1,11 +1,13 @@
+//required dependencies
 const connection = require("./connection");
 const mysql = require('mysql');
 
+//constructor class for database queries
 class Database {
     constructor(connection) {
         this.connection = connection;
     }
-
+    // query for listing all employees
     findAllEmployees() {
         return new Promise((resolve, reject) => {
             connection.query('SELECT * FROM employee', (err, results) => {
@@ -14,7 +16,7 @@ class Database {
             })
         })
     }
-
+    // query for listing all departments
     findAllDepartments() {
         return new Promise((resolve, reject) => {
             connection.query('SELECT * FROM department', (err, results) => {
@@ -23,7 +25,7 @@ class Database {
             })
         })
     }
-
+    // query for listing all roles
     findAllRoles() {
         return new Promise((resolve, reject) => {
             connection.query('SELECT * FROM role', (err, results) => {
@@ -32,7 +34,7 @@ class Database {
             })
         })
     }
-
+    // query for adding an employee
     addEmployee(firstName, lastName, roleID, managerID) {
         return new Promise((resolve, reject) => {
             connection.query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)', [firstName, lastName, roleID, managerID], function (err, data) {
@@ -42,7 +44,7 @@ class Database {
         })
     }
 
-
+    //query for adding a department
     addDepartment(department) {
         return new Promise((resolve, reject) => {
             connection.query('INSERT INTO department (name) VALUES (?)', [department], function (err, data) {
@@ -52,6 +54,7 @@ class Database {
         })
     }
 
+    //query for adding a role
     addRole(title, salary, departmentId) {
         return new Promise((resolve, reject) => {
             connection.query('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)', [title, salary, departmentId], function (err, data) {
@@ -61,6 +64,7 @@ class Database {
         })
     }
 
+    //query for updating a role
     updateRole(id, role_id) {
         console.log(role_id);
         console.log(id);
@@ -71,6 +75,8 @@ class Database {
             })
         })
     }
+
+    //query for deleting an employee
     deleteEmployee(id) {
         return new Promise((resolve, reject) => {
             connection.query('DELETE FROM employee where id = ?', [id], function (err, data) {
@@ -79,6 +85,8 @@ class Database {
             })
         })
     }
+
+    //query for deleting a role
     deleteRole(id) {
         return new Promise((resolve, reject) => {
             connection.query('DELETE FROM role where id = ?', [id], function (err, data) {
@@ -88,6 +96,7 @@ class Database {
         })
     }
 
+    //query for deleting a department
     deleteDepartment(id) {
         return new Promise((resolve, reject) => {
             connection.query('DELETE FROM department where id = ?', [id], function (err, data) {
