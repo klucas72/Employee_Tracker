@@ -71,7 +71,14 @@ class Database {
             })
         })
     }
-
+    deleteEmployee(id) {
+        return new Promise((resolve, reject) => {
+            connection.query('DELETE FROM employee where id = ?', [id], function (err, data) {
+                if (err) reject(err);
+                resolve(data);
+            })
+        })
+    }
 
 }
 
