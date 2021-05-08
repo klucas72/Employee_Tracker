@@ -60,14 +60,19 @@ class Database {
             })
         })
     }
-    updateRole(role_id, id) {
+
+    updateRole(id, role_id) {
+        console.log(role_id);
+        console.log(id);
         return new Promise((resolve, reject) => {
-            connection.query('UPDATE employee SET role_id = ? WHERE id = ? VALUES (?, ?)', [role_id, id], function (err, data) {
+            connection.query('UPDATE employee SET role_id = ? WHERE id = ?', [role_id, id], function (err, data) {
                 if (err) reject(err);
                 resolve(data);
             })
         })
     }
+
+
 }
 
 module.exports = new Database(connection);
