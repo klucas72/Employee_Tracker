@@ -47,7 +47,7 @@ class Database {
     //query for adding a department
     addDepartment(department) {
         return new Promise((resolve, reject) => {
-            connection.query('INSERT INTO department (name) VALUES (?)', [department], function (err, data) {
+            connection.query('INSERT INTO department (NAME) VALUES (?)', [department], function (err, data) {
                 if (err) reject(err);
                 resolve(data);
             })
